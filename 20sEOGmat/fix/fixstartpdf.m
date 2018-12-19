@@ -12,15 +12,19 @@ function y=fixstartpdf(x,path,name,type,number)
     for i=1:size(cwth,2)
         if(cwth(i)<=thfd&&cwth(i)>=-thfd)
             fixcounth=fixcounth+1;
-        elseif((cwth(i)>thfd||cwth(i)<-thfd)&&fixcounth>40)
-            fixstarth=[fixstarth;i-fixcounth];
+        elseif((cwth(i)>thfd||cwth(i)<-thfd))
+            if(fixcounth>40)
+               fixstarth=[fixstarth;i-fixcounth];
+            end
             fixcounth=0;
         end
         
         if(cwtv(i)<=thfd&&cwtv(i)>=-thfd)
             fixcountv=fixcountv+1;
-        elseif((cwtv(i)>thfd||cwtv(i)<-thfd)&&fixcountv>40)
-            fixstartv=[fixstartv;i-fixcountv];
+        elseif((cwtv(i)>thfd||cwtv(i)<-thfd))
+            if(fixcountv>40)
+                fixstartv=[fixstartv;i-fixcountv];
+            end
             fixcountv=0;
         end
     end

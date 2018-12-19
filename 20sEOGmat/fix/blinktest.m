@@ -1,20 +1,20 @@
-load(".\Y\EOGYfix2\EOGYfix220s.mat");
+load(".\Y\EOGYfix10\EOGYfix1020s.mat");
 plot(data20s(:,2));
 hold on;
-CWTcoeffs = cwt(data20s(:,2),1:128,'haar');
-plot(CWTcoeffs(20,:),"red");
+% CWTcoeffs = cwt(data20s(:,2),1:128,'haar');
+% plot(CWTcoeffs(20,:),'.');
 grid on;
 
 CWTcoeffsv = cwt(data20s(:,2),1:128,'haar');
 cwtv=CWTcoeffsv(20,:);
 
-thsd=0.02;
+thsd=0.06;
 sacpeakv=[];
 saccountv=[];
 for i=1:size(cwtv,2)
     if(cwtv(i)>thsd||cwtv(i)<-thsd)
        saccountv=[saccountv;cwtv(i)];
-    elseif(cwtv(i)<=thsd&&cwtv(i)>=-thsd&&size(saccountv,1)>4)
+    elseif(cwtv(i)<=thsd&&cwtv(i)>=-thsd)
        if(max(saccountv)>0)
            loc=(i-size(saccountv,1)-1+find(saccountv==max(saccountv),1));
            sacpeakv=[sacpeakv;max(saccountv) loc];
