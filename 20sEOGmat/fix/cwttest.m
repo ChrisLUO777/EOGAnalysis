@@ -1,12 +1,12 @@
 load(".\Y\EOGYfix10\EOGYfix1020s.mat");
-plot(data20s(1900:4000,2));
+plot(data20s(:,1));
 hold on;
 grid on;
-% CWTcoeffs = cwt(data20s(:,2),1:128,'haar');
-% plot(CWTcoeffs(20,:),"red");
+CWTcoeffs = cwt(data20s(:,1),1:128,'haar');
+plot(CWTcoeffs(20,:),"red");
 
-CWTcoeffsh = cwt(data20s(1:1980,1),1:128,'haar');
-CWTcoeffsv = cwt(data20s(1900:4000,2),1:128,'haar');
+CWTcoeffsh = cwt(data20s(:,1),1:128,'haar');
+CWTcoeffsv = cwt(data20s(:,2),1:128,'haar');
 cwth=CWTcoeffsh(20,:);
 cwtv=CWTcoeffsv(20,:);
 
@@ -25,8 +25,8 @@ for i=1:size(cwth,2)
        saccounth=0;
     end
 end
-% plot(sacstarth(:,1),zeros(size(sacstarth,1),1),'o');
-% plot(sacstarth(:,2),zeros(size(sacstarth,1),1),'x');
+plot(sacstarth(:,1),zeros(size(sacstarth,1),1),'o');
+plot(sacstarth(:,2),zeros(size(sacstarth,1),1),'x');
 
 for j=1:size(cwtv,2)
     if(cwtv(j)>thsd||cwtv(j)<-thsd)
@@ -38,8 +38,8 @@ for j=1:size(cwtv,2)
        saccountv=0;
     end
 end
-plot(sacstartv(:,1),zeros(size(sacstartv,1),1),'o');
-plot(sacstartv(:,2),zeros(size(sacstartv,1),1),'x');
+% plot(sacstartv(:,1),zeros(size(sacstartv,1),1),'o');
+% plot(sacstartv(:,2),zeros(size(sacstartv,1),1),'x');
 
 % thfd=0.03;
 % fixstarth=[];

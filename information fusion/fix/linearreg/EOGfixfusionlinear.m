@@ -15,21 +15,21 @@ mtest=size(Xtest,1);
 %linear regression
 
 %learning curve
-lambda = 0;
-[error_train, error_val] = ...
-    learningCurve([ones(m, 1) X], y, ...
-                  [ones(size(Xval, 1), 1) Xval], yval, ...
-                  lambda);
-
-plot(1:m, error_train, 1:m, error_val);
-title('Learning curve for linear regression')
-legend('Train', 'Cross Validation')
-xlabel('Number of training examples')
-ylabel('Error')
-axis([0 115 0 0.5])
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+% lambda = 0;
+% [error_train, error_val] = ...
+%     learningCurve([ones(m, 1) X], y, ...
+%                   [ones(size(Xval, 1), 1) Xval], yval, ...
+%                   lambda);
+% 
+% plot(1:m, error_train, 1:m, error_val);
+% title('Learning curve for linear regression')
+% legend('Train', 'Cross Validation')
+% xlabel('Number of training examples')
+% ylabel('Error')
+% axis([0 115 0 0.5])
+% 
+% fprintf('Program paused. Press enter to continue.\n');
+% pause;
 
 %lambda validation
 close all;
@@ -45,7 +45,7 @@ pause;
 
 %train linear regression
 close all;
-lambda = 1;
+lambda = 3;
 [theta] = trainLinearReg([ones(m, 1) X], y, lambda);
 
 %EER

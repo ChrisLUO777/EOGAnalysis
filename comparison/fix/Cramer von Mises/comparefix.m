@@ -1,4 +1,4 @@
-subcombs=combinesubs(['L' 'Y'],['L' 'Y'],2);
+subcombs=combinesubs(["Anh" "Luo" "Yi"],["Anh" "Luo" "Yi"],3);
 count=1;
 for k=1:size(subcombs,1)
     path1="EOG"+subcombs(k,1)+"fix";

@@ -1,8 +1,8 @@
 load(".\Y\EOGYfix10\EOGYfix1020s.mat");
 plot(data20s(:,2));
 hold on;
-% CWTcoeffs = cwt(data20s(:,2),1:128,'haar');
-% plot(CWTcoeffs(20,:),'.');
+CWTcoeffs = cwt(data20s(:,2),1:128,'haar');
+plot(CWTcoeffs(20,:));
 grid on;
 
 CWTcoeffsv = cwt(data20s(:,2),1:128,'haar');

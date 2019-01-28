@@ -1,4 +1,4 @@
-subname=['L' 'Y'];
+subname=["Anh" "Luo" "Yi"];
 for name=subname
     path="EOG"+name+"fix";
     type="fix";
