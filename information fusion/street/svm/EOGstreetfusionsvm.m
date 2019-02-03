@@ -2,14 +2,14 @@ close all; clear;
 load("EOGstreettrainset.mat");
 load("EOGstreetcvset.mat");
 load("EOGstreettestset.mat");
-X=EOGstreettrainset(:,1:24);
-y=EOGstreettrainset(:,25);
+X=EOGstreettrainset(:,1:26);
+y=EOGstreettrainset(:,27);
 m = size(X, 1);
-Xval=EOGstreetcvset(:,1:24);
-yval=EOGstreetcvset(:,25);
+Xval=EOGstreetcvset(:,1:26);
+yval=EOGstreetcvset(:,27);
 mval=size(Xval,1);
-Xtest=EOGstreettestset(:,1:24);
-ytest=EOGstreettestset(:,25);
+Xtest=EOGstreettestset(:,1:26);
+ytest=EOGstreettestset(:,27);
 mtest=size(Xtest,1);
 
 %svm

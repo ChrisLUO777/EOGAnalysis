@@ -1,20 +1,36 @@
 function y=maxpdf(x,path,name,type,number)
     assert( ismatrix(x) );
-    derivh=diff(x(:,1));
-    maxh=[];
-    derivv=diff(x(:,2));
-    maxv=[];
-    for i=1:size(derivh,1)
-        if(derivh(i)==0&&x(i,1)>0)
-            maxh=[maxh;x(i,1)];
+    CWTcoeffsh = cwt(x(:,1),1:128,'haar');
+    CWTcoeffsv = cwt(x(:,2),1:128,'haar');
+    cwth=CWTcoeffsh(20,:);
+    cwtv=CWTcoeffsv(20,:);
+    thsd=0.02;
+    sacamplitudeh=[];
+    sacamplitudev=[];
+    saccounth=[];
+    saccountv=[];
+    for i=1:size(cwth,2)
+        if(cwth(i)>thsd)
+            saccounth=[saccounth;x(i,1)];
+        elseif(cwth(i)<=thsd)
+            if(size(saccounth,1)>4)
+                sacamplitudeh=[sacamplitudeh;max(saccounth)];
+            end
+            saccounth=[];
         end
-        if(derivv(i)==0&&x(i,2)>0)
-            maxv=[maxv;x(i,2)];
+        
+        if(cwtv(i)>thsd)
+            saccountv=[saccountv;x(i,2)];
+        elseif(cwtv(i)<=thsd)
+            if(size(saccountv,1)>4)
+                sacamplitudev=[sacamplitudev;max(saccountv)];
+            end
+            saccountv=[];
         end
     end
-    [f,xi]=ksdensity(maxh);
+    [f,xi]=ksdensity(sacamplitudeh);
     y=[f;xi];
-    [f,xi]=ksdensity(maxv);
+    [f,xi]=ksdensity(sacamplitudev);
     y=[y;f;xi];
     save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"maxpdf.mat",'y');
 end

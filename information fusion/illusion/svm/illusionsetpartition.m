@@ -2,15 +2,13 @@ load("EOGillusionwholeset.mat");
 EOGillusiontrainset=[];
 EOGillusioncvset=[];
 EOGillusiontestset=[];
-for i=0:18
-    out=randperm(10);
-    pick=out(1:4)+i*10;
+for i=0:86 %remember to change this part
+    out=randperm(5);
+    pick=out+i*5;
     EOGillusioncvset=[EOGillusioncvset;EOGillusionwholeset(pick(1),:)];
-    EOGillusioncvset=[EOGillusioncvset;EOGillusionwholeset(pick(2),:)];
-    EOGillusiontestset=[EOGillusiontestset;EOGillusionwholeset(pick(3),:)];
-    EOGillusiontestset=[EOGillusiontestset;EOGillusionwholeset(pick(4),:)];
-    for j=5:10
-        EOGillusiontrainset=[EOGillusiontrainset;EOGillusionwholeset(out(j)+i*10,:)];
+    EOGillusiontestset=[EOGillusiontestset;EOGillusionwholeset(pick(2),:)];
+    for j=3:5
+        EOGillusiontrainset=[EOGillusiontrainset;EOGillusionwholeset(out(j)+i*5,:)];
     end
 end
 save("EOGillusiontrainset.mat",'EOGillusiontrainset');

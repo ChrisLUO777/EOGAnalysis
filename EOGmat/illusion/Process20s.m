@@ -1,4 +1,4 @@
-subname=["Anh" "Yi"];
+subname=["Anh" "Luo" "Yi"];
 for name=subname
     for i=1:10
         load(".\"+name+"\EOG"+name+"illusion"+i+".mat");

@@ -2,14 +2,14 @@ close all; clear;
 load("EOGfixtrainset.mat");
 load("EOGfixcvset.mat");
 load("EOGfixtestset.mat");
-X=EOGfixtrainset(:,1:24);
-y=EOGfixtrainset(:,25);
+X=EOGfixtrainset(:,1:26);
+y=EOGfixtrainset(:,27);
 m = size(X, 1);
-Xval=EOGfixcvset(:,1:24);
-yval=EOGfixcvset(:,25);
+Xval=EOGfixcvset(:,1:26);
+yval=EOGfixcvset(:,27);
 mval=size(Xval,1);
-Xtest=EOGfixtestset(:,1:24);
-ytest=EOGfixtestset(:,25);
+Xtest=EOGfixtestset(:,1:26);
+ytest=EOGfixtestset(:,27);
 mtest=size(Xtest,1);
 
 %svm

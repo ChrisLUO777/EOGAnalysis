@@ -1,4 +1,4 @@
-subcombs=combinesubs(["Anh" "Yi"],["Anh" "Yi"],2);
+subcombs=combinesubs(["Anh" "Luo" "Yi"],["Anh" "Luo" "Yi"],3);
 count=1;
 for k=1:size(subcombs,1)
     path1="EOG"+subcombs(k,1)+"illusion";
@@ -21,6 +21,9 @@ for k=1:size(subcombs,1)
             load(".\"+path1+i+"\EOG"+subcombs(k,1)+type+i+"fixstartpdf.mat");
             fixstarthpdf1=y(1,:);
             fixstartvpdf1=y(3,:);
+            load(".\"+path1+i+"\EOG"+subcombs(k,1)+type+i+"fixcentroidpdf.mat");
+            fixcentroidhpdf1=y(1,:);
+            fixcentroidvpdf1=y(3,:);
             load(".\"+path1+i+"\EOG"+subcombs(k,1)+type+i+"maxpdf.mat");
             maxhpdf1=y(1,:);
             maxvpdf1=y(3,:);
@@ -59,6 +62,9 @@ for k=1:size(subcombs,1)
                 load(".\"+path2+j+"\EOG"+subcombs(k,2)+type+j+"fixstartpdf.mat");
                 fixstarthpdf2=y(1,:);
                 fixstartvpdf2=y(3,:);
+                load(".\"+path2+j+"\EOG"+subcombs(k,2)+type+j+"fixcentroidpdf.mat");
+                fixcentroidhpdf2=y(1,:);
+                fixcentroidvpdf2=y(3,:);
                 load(".\"+path2+j+"\EOG"+subcombs(k,2)+type+j+"maxpdf.mat");
                 maxhpdf2=y(1,:);
                 maxvpdf2=y(3,:);
@@ -129,8 +135,12 @@ for k=1:size(subcombs,1)
                 EOGillusionwholeset(count,23)=cm_P;
                 [~,cm_P,~] = cmtest2(blinkdurationpdf1,blinkdurationpdf2);
                 EOGillusionwholeset(count,24)=cm_P;
+                [~,cm_P,~] = cmtest2(fixcentroidhpdf1,fixcentroidhpdf2);
+                EOGillusionwholeset(count,25)=cm_P;
+                [~,cm_P,~] = cmtest2(fixcentroidvpdf1,fixcentroidvpdf2);
+                EOGillusionwholeset(count,26)=cm_P;
                 
-                EOGillusionwholeset(count,25)=(subcombs(k,1)~=subcombs(k,2));
+                EOGillusionwholeset(count,27)=(subcombs(k,1)~=subcombs(k,2));
                 count=count+1;
             end
         end
@@ -151,6 +161,9 @@ for k=1:size(subcombs,1)
             load(".\"+path1+i+"\EOG"+subcombs(k,1)+type+i+"fixstartpdf.mat");
             fixstarthpdf1=y(1,:);
             fixstartvpdf1=y(3,:);
+            load(".\"+path1+i+"\EOG"+subcombs(k,1)+type+i+"fixcentroidpdf.mat");
+            fixcentroidhpdf1=y(1,:);
+            fixcentroidvpdf1=y(3,:);
             load(".\"+path1+i+"\EOG"+subcombs(k,1)+type+i+"maxpdf.mat");
             maxhpdf1=y(1,:);
             maxvpdf1=y(3,:);
@@ -189,6 +202,9 @@ for k=1:size(subcombs,1)
                 load(".\"+path2+j+"\EOG"+subcombs(k,2)+type+j+"fixstartpdf.mat");
                 fixstarthpdf2=y(1,:);
                 fixstartvpdf2=y(3,:);
+                load(".\"+path2+j+"\EOG"+subcombs(k,2)+type+j+"fixcentroidpdf.mat");
+                fixcentroidhpdf2=y(1,:);
+                fixcentroidvpdf2=y(3,:);
                 load(".\"+path2+j+"\EOG"+subcombs(k,2)+type+j+"maxpdf.mat");
                 maxhpdf2=y(1,:);
                 maxvpdf2=y(3,:);
@@ -259,8 +275,12 @@ for k=1:size(subcombs,1)
                 EOGillusionwholeset(count,23)=cm_P;
                 [~,cm_P,~] = cmtest2(blinkdurationpdf1,blinkdurationpdf2);
                 EOGillusionwholeset(count,24)=cm_P;
+                [~,cm_P,~] = cmtest2(fixcentroidhpdf1,fixcentroidhpdf2);
+                EOGillusionwholeset(count,25)=cm_P;
+                [~,cm_P,~] = cmtest2(fixcentroidvpdf1,fixcentroidvpdf2);
+                EOGillusionwholeset(count,26)=cm_P;
 
-                EOGillusionwholeset(count,25)=(subcombs(k,1)~=subcombs(k,2));
+                EOGillusionwholeset(count,27)=(subcombs(k,1)~=subcombs(k,2));
                 count=count+1;
             end
         end

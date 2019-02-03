@@ -2,15 +2,13 @@ load("EOGstreetwholeset.mat");
 EOGstreettrainset=[];
 EOGstreetcvset=[];
 EOGstreettestset=[];
-for i=0:18
-    out=randperm(10);
-    pick=out(1:4)+i*10;
+for i=0:86 %remember to change this part
+    out=randperm(5);
+    pick=out+i*5;
     EOGstreetcvset=[EOGstreetcvset;EOGstreetwholeset(pick(1),:)];
-    EOGstreetcvset=[EOGstreetcvset;EOGstreetwholeset(pick(2),:)];
-    EOGstreettestset=[EOGstreettestset;EOGstreetwholeset(pick(3),:)];
-    EOGstreettestset=[EOGstreettestset;EOGstreetwholeset(pick(4),:)];
-    for j=5:10
-        EOGstreettrainset=[EOGstreettrainset;EOGstreetwholeset(out(j)+i*10,:)];
+    EOGstreettestset=[EOGstreettestset;EOGstreetwholeset(pick(2),:)];
+    for j=3:5
+        EOGstreettrainset=[EOGstreettrainset;EOGstreetwholeset(out(j)+i*5,:)];
     end
 end
 save("EOGstreettrainset.mat",'EOGstreettrainset');

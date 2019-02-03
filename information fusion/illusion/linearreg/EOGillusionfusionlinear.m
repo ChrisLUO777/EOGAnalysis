@@ -2,15 +2,15 @@ close all; clear;
 load("EOGillusiontrainset.mat");
 load("EOGillusioncvset.mat");
 load("EOGillusiontestset.mat");
-X=EOGillusiontrainset(:,1:24);
-y=EOGillusiontrainset(:,25);
+X=EOGillusiontrainset(:,1:26);
+y=EOGillusiontrainset(:,27);
 m = size(X, 1);
-Xval=EOGillusioncvset(:,1:24);
-yval=EOGillusioncvset(:,25);
+Xval=EOGillusioncvset(:,1:26);
+yval=EOGillusioncvset(:,27);
 mval=size(Xval,1);
-theta = zeros(24, 1);
-Xtest=EOGillusiontestset(:,1:24);
-ytest=EOGillusiontestset(:,25);
+theta = zeros(26, 1);
+Xtest=EOGillusiontestset(:,1:26);
+ytest=EOGillusiontestset(:,27);
 mtest=size(Xtest,1);
 %linear regression
 

@@ -12,6 +12,7 @@ for name=subname
         meanpdf(data20s,path,name,type,i);
         fixstartpdf(data20s,path,name,type,i);
         fixdurationpdf(data20s,path,name,type,i);
+        fixcentroid(data20s,path,name,type,i);
         sacstartpdf(data20s,path,name,type,i);
         sacdurationpdf(data20s,path,name,type,i);
         sacamplitudepdf(data20s,path,name,type,i);
