@@ -1,4 +1,5 @@
 function pred = svmOutput(model, X)
+%MODIFIED FROM SVMPREDICT
 %SVMPREDICT returns a vector of predictions using a trained SVM model
 %(svmTrain). 
 %   pred = SVMPREDICT(model, X) returns a vector of predictions using a 

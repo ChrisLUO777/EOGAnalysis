@@ -45,7 +45,7 @@ pause;
 
 %train linear regression
 close all;
-lambda = 3;
+lambda = 10;
 [theta] = trainLinearReg([ones(m, 1) X], y, lambda);
 
 %EER

@@ -2,13 +2,49 @@ close all; clear;
 load("EOGillusiontrainset.mat");
 load("EOGillusioncvset.mat");
 load("EOGillusiontestset.mat");
-X=EOGillusiontrainset(:,1:26);
+
+d=EOGillusiontrainset(:,1:26);
+f=EOGillusiontrainset(:,27);
+K=26;
+fea=mrmr_mid_d(d,f,K);
+Fscore=0;
+bestfeature=[];
+mRMREER=1;
+
+for count=2:26
+    X=EOGillusiontrainset(:,fea(1:count));
+    y=EOGillusiontrainset(:,27);
+
+    Xval=EOGillusioncvset(:,fea(1:count));
+    yval=EOGillusioncvset(:,27);
+
+    Xtest=EOGillusiontestset(:,fea(1:count));
+    ytest=EOGillusiontestset(:,27);
+
+    
+    %svm
+    % Try different SVM Parameters here
+    [C, sigma] = dataset3Params(X, y, Xval, yval);
+
+    % Train the SVM
+    model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
+    predicth=svmOutput(model, Xtest);
+
+    %mRMR(EER)
+    tempEER=EER(ytest,predicth);
+    if tempEER<mRMREER
+       mRMREER=tempEER;
+       bestfeature=fea(1:count);
+    end
+end
+
+X=EOGillusiontrainset(:,bestfeature);
 y=EOGillusiontrainset(:,27);
 m = size(X, 1);
-Xval=EOGillusioncvset(:,1:26);
+Xval=EOGillusioncvset(:,bestfeature);
 yval=EOGillusioncvset(:,27);
 mval=size(Xval,1);
-Xtest=EOGillusiontestset(:,1:26);
+Xtest=EOGillusiontestset(:,bestfeature);
 ytest=EOGillusiontestset(:,27);
 mtest=size(Xtest,1);
 

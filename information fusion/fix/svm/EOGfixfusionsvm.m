@@ -2,13 +2,50 @@ close all; clear;
 load("EOGfixtrainset.mat");
 load("EOGfixcvset.mat");
 load("EOGfixtestset.mat");
-X=EOGfixtrainset(:,1:26);
+
+d=EOGfixtrainset(:,1:26);
+f=EOGfixtrainset(:,27);
+K=26;
+fea=mrmr_mid_d(d,f,K);
+Fscore=0;
+bestfeature=[];
+mRMREER=1;
+
+for count=2:26
+    X=EOGfixtrainset(:,fea(1:count));
+    y=EOGfixtrainset(:,27);
+
+    Xval=EOGfixcvset(:,fea(1:count));
+    yval=EOGfixcvset(:,27);
+
+    Xtest=EOGfixtestset(:,fea(1:count));
+    ytest=EOGfixtestset(:,27);
+
+    
+    %svm
+    % Try different SVM Parameters here
+    [C, sigma] = dataset3Params(X, y, Xval, yval);
+
+    % Train the SVM
+    model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
+    predicth=svmOutput(model, Xtest);
+
+    %mRMR(EER)
+    tempEER=EER(ytest,predicth);
+    if tempEER<mRMREER
+       mRMREER=tempEER;
+       bestfeature=fea(1:count);
+    end
+end
+
+
+X=EOGfixtrainset(:,bestfeature);
 y=EOGfixtrainset(:,27);
 m = size(X, 1);
-Xval=EOGfixcvset(:,1:26);
+Xval=EOGfixcvset(:,bestfeature);
 yval=EOGfixcvset(:,27);
 mval=size(Xval,1);
-Xtest=EOGfixtestset(:,1:26);
+Xtest=EOGfixtestset(:,bestfeature);
 ytest=EOGfixtestset(:,27);
 mtest=size(Xtest,1);
 
