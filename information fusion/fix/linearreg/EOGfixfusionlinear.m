@@ -49,21 +49,14 @@ lambda = 3;
 [theta] = trainLinearReg([ones(m, 1) X], y, lambda);
 
 %EER
-RP=0;
-RN=0;
-for j=1:size(ytest,1)
-    if(ytest(j,1)==0)
-        RP=RP+1;
-    else
-        RN=RN+1;
-    end
-end
+RN=sum(ytest);
+RP=size(ytest,1)-RN;
 
 threshold=-5:0.00001:5;
 predicth=[ones(mtest, 1) Xtest]*theta;
-TPR=0;
-FPR=0;
-EER=0;
+TPR=zeros(1,size(threshold,2));
+FPR=zeros(1,size(threshold,2));
+count=1;
 for k=threshold
     TP=0;
     FP=0;
@@ -74,45 +67,22 @@ for k=threshold
                 FP=FP+1;
         end
     end
-    TPR=(TP/RP);
-    FPR=(FP/RN);
-    if (1-TPR)<=FPR
-        EER=FPR;
-        break;
-    end
+    TPR(1,count)=(TP/RP);
+    FPR(1,count)=(FP/RN);
+    count=count+1;
 end
 
-% threshold=-5:0.00001:5;
-% predicth=[ones(mtest, 1) Xtest]*theta;
-% TPR=zeros(1,size(threshold,2));
-% FPR=zeros(1,size(threshold,2));
-% count=1;
-% for k=threshold
-%     TP=0;
-%     FP=0;
-%     for i=1:size(ytest,1)
-%         if((predicth(i,1)<k) && (ytest(i,1)==0))%TP
-%                 TP=TP+1;
-%         elseif((predicth(i,1)<k) && (ytest(i,1)==1))%FP
-%                 FP=FP+1;
-%         end
-%     end
-%     TPR(1,count)=(TP/RP);
-%     FPR(1,count)=(FP/RN);
-%     count=count+1;
-% end
-% 
-% plot(FPR,TPR);
-% hold on;
-% plot(FPR,TPR,'o');
-% plot(0:0.01:1,1:-0.01:0,'r');
-% grid on;
-% xlabel('False Positive Rate');
-% ylabel('True Positive Rate');
-% axis([0 1 0 1]);
-% 
-% fprintf('Program paused. Press enter to continue.\n');
-% pause;
+plot(FPR,TPR);
+hold on;
+plot(FPR,TPR,'o');
+plot(0:0.01:1,1:-0.01:0,'r');
+grid on;
+xlabel('False Positive Rate');
+ylabel('True Positive Rate');
+axis([0 1 0 1]);
+
+fprintf('Program paused. Press enter to continue.\n');
+pause;
 
 %F score
 close all;

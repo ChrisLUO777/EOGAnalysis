@@ -49,15 +49,8 @@ lambda = 10;
 [theta] = trainLinearReg([ones(m, 1) X], y, lambda);
 
 %EER
-RP=0;
-RN=0;
-for j=1:size(ytest,1)
-    if(ytest(j,1)==0)
-        RP=RP+1;
-    else
-        RN=RN+1;
-    end
-end
+RN=sum(ytest);
+RP=size(ytest,1)-RN;
 
 threshold=-5:0.00001:5;
 predicth=[ones(mtest, 1) Xtest]*theta;

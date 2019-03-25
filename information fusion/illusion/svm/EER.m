@@ -1,15 +1,8 @@
 function result=EER(ytest,predicth)
     result=1;
-    RP=0;
-    RN=0;
-    for j=1:size(ytest,1)
-        if(ytest(j,1)==0)
-            RP=RP+1;
-        else
-            RN=RN+1;
-        end
-    end
-
+    testsize=size(ytest,1);
+    RN=sum(ytest);
+    RP=testsize-RN;
     threshold=-5:0.00001:5;
     TPR=0;
     FPR=0;

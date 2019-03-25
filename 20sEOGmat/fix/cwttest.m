@@ -1,4 +1,4 @@
-load(".\Y\EOGYfix10\EOGYfix1020s.mat");
+load(".\Yi\EOGYifix10\EOGYifix1020s.mat");
 plot(data20s(:,1));
 hold on;
 grid on;
@@ -27,7 +27,7 @@ for i=1:size(cwth,2)
 end
 plot(sacstarth(:,1),zeros(size(sacstarth,1),1),'o');
 plot(sacstarth(:,2),zeros(size(sacstarth,1),1),'x');
-
+pbaspect([1.2 1 1])
 for j=1:size(cwtv,2)
     if(cwtv(j)>thsd||cwtv(j)<-thsd)
        saccountv=saccountv+1;

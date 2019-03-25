@@ -55,16 +55,8 @@ mtest=size(Xtest,1);
 model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
 
 %EER
-RP=0;
-RN=0;
-for j=1:size(ytest,1)
-    if(ytest(j,1)==0)
-        RP=RP+1;
-    else
-        RN=RN+1;
-    end
-end
-
+RN=sum(ytest);
+RP=size(ytest,1)-RN;
 threshold=-5:0.00001:5;
 predicth=svmOutput(model, Xtest);
 TPR=zeros(1,size(threshold,2));
