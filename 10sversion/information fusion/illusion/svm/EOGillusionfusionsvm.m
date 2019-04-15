@@ -3,23 +3,23 @@ load("EOGillusiontrainset.mat");
 load("EOGillusioncvset.mat");
 load("EOGillusiontestset.mat");
 
-d=EOGillusiontrainset(:,1:26);
-f=EOGillusiontrainset(:,27);
-K=26;
+d=EOGillusiontrainset(:,1:46);
+f=EOGillusiontrainset(:,47);
+K=46;
 fea=mrmr_mid_d(d,f,K);
 Fscore=0;
 bestfeature=[];
 mRMREER=1;
 
-for count=2:26
+for count=2:46
     X=EOGillusiontrainset(:,fea(1:count));
-    y=EOGillusiontrainset(:,27);
+    y=EOGillusiontrainset(:,47);
 
     Xval=EOGillusioncvset(:,fea(1:count));
-    yval=EOGillusioncvset(:,27);
+    yval=EOGillusioncvset(:,47);
 
     Xtest=EOGillusiontestset(:,fea(1:count));
-    ytest=EOGillusiontestset(:,27);
+    ytest=EOGillusiontestset(:,47);
 
     
     %svm
@@ -39,13 +39,13 @@ for count=2:26
 end
 
 X=EOGillusiontrainset(:,bestfeature);
-y=EOGillusiontrainset(:,27);
+y=EOGillusiontrainset(:,47);
 m = size(X, 1);
 Xval=EOGillusioncvset(:,bestfeature);
-yval=EOGillusioncvset(:,27);
+yval=EOGillusioncvset(:,47);
 mval=size(Xval,1);
 Xtest=EOGillusiontestset(:,bestfeature);
-ytest=EOGillusiontestset(:,27);
+ytest=EOGillusiontestset(:,47);
 mtest=size(Xtest,1);
 
 %svm

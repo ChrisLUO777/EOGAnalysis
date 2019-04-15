@@ -18,6 +18,16 @@ for name=subname
         sacamplitudepdf(data10s,path,name,type,i);
         blinkstartpdf(data10s,path,name,type,i);
         blinkdurationpdf(data10s,path,name,type,i);
+        maxdistancepdf(data10s,path,name,type,i);
+        mindistancepdf(data10s,path,name,type,i);
+        slopeoppdf(data10s,path,name,type,i);
+        slopeonpdf(data10s,path,name,type,i);
+        slopefppdf(data10s,path,name,type,i);
+        slopefnpdf(data10s,path,name,type,i);
+        maxderipdf(data10s,path,name,type,i);
+        minderipdf(data10s,path,name,type,i);
+        maxderidistancepdf(data10s,path,name,type,i);
+        minderidistancepdf(data10s,path,name,type,i);
     end
 end
 

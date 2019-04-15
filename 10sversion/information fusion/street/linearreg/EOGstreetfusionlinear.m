@@ -2,15 +2,15 @@ close all; clear;
 load("EOGstreettrainset.mat");
 load("EOGstreetcvset.mat");
 load("EOGstreettestset.mat");
-X=EOGstreettrainset(:,1:26);
-y=EOGstreettrainset(:,27);
+X=EOGstreettrainset(:,1:46);
+y=EOGstreettrainset(:,47);
 m = size(X, 1);
-Xval=EOGstreetcvset(:,1:26);
-yval=EOGstreetcvset(:,27);
+Xval=EOGstreetcvset(:,1:46);
+yval=EOGstreetcvset(:,47);
 mval=size(Xval,1);
-theta = zeros(26, 1);
-Xtest=EOGstreettestset(:,1:26);
-ytest=EOGstreettestset(:,27);
+theta = zeros(46, 1);
+Xtest=EOGstreettestset(:,1:46);
+ytest=EOGstreettestset(:,47);
 mtest=size(Xtest,1);
 %linear regression
 

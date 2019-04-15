@@ -3,23 +3,23 @@ load("EOGfixtrainset.mat");
 load("EOGfixcvset.mat");
 load("EOGfixtestset.mat");
 
-d=EOGfixtrainset(:,1:26);
-f=EOGfixtrainset(:,27);
-K=26;
+d=EOGfixtrainset(:,1:46);
+f=EOGfixtrainset(:,47);
+K=46;
 fea=mrmr_mid_d(d,f,K);
 Fscore=0;
 bestfeature=[];
 mRMREER=1;
 
-for count=2:26
+for count=2:46
     X=EOGfixtrainset(:,fea(1:count));
-    y=EOGfixtrainset(:,27);
+    y=EOGfixtrainset(:,47);
 
     Xval=EOGfixcvset(:,fea(1:count));
-    yval=EOGfixcvset(:,27);
+    yval=EOGfixcvset(:,47);
 
     Xtest=EOGfixtestset(:,fea(1:count));
-    ytest=EOGfixtestset(:,27);
+    ytest=EOGfixtestset(:,47);
 
     
     %svm
@@ -40,13 +40,13 @@ end
 
 
 X=EOGfixtrainset(:,bestfeature);
-y=EOGfixtrainset(:,27);
+y=EOGfixtrainset(:,47);
 m = size(X, 1);
 Xval=EOGfixcvset(:,bestfeature);
-yval=EOGfixcvset(:,27);
+yval=EOGfixcvset(:,47);
 mval=size(Xval,1);
 Xtest=EOGfixtestset(:,bestfeature);
-ytest=EOGfixtestset(:,27);
+ytest=EOGfixtestset(:,47);
 mtest=size(Xtest,1);
 
 %svm

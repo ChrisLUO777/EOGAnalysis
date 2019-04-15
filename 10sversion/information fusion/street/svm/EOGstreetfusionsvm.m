@@ -3,22 +3,22 @@ load("EOGstreettrainset.mat");
 load("EOGstreetcvset.mat");
 load("EOGstreettestset.mat");
 
-d=EOGstreettrainset(:,1:26);
-f=EOGstreettrainset(:,27);
-K=26;
+d=EOGstreettrainset(:,1:46);
+f=EOGstreettrainset(:,47);
+K=46;
 fea=mrmr_mid_d(d,f,K);
 mRMREER=1;
 bestfeature=[];
 
-for count=2:26
+for count=2:46
     X=EOGstreettrainset(:,fea(1:count));
-    y=EOGstreettrainset(:,27);
+    y=EOGstreettrainset(:,47);
 
     Xval=EOGstreetcvset(:,fea(1:count));
-    yval=EOGstreetcvset(:,27);
+    yval=EOGstreetcvset(:,47);
 
     Xtest=EOGstreettestset(:,fea(1:count));
-    ytest=EOGstreettestset(:,27);
+    ytest=EOGstreettestset(:,47);
 
     
     %svm
@@ -38,13 +38,13 @@ for count=2:26
 end
 
 X=EOGstreettrainset(:,bestfeature);
-y=EOGstreettrainset(:,27);
+y=EOGstreettrainset(:,47);
 m = size(X, 1);
 Xval=EOGstreetcvset(:,bestfeature);
-yval=EOGstreetcvset(:,27);
+yval=EOGstreetcvset(:,47);
 mval=size(Xval,1);
 Xtest=EOGstreettestset(:,bestfeature);
-ytest=EOGstreettestset(:,27);
+ytest=EOGstreettestset(:,47);
 mtest=size(Xtest,1);
 
 %svm
