@@ -2,15 +2,15 @@ close all; clear;
 load("EOGfixtrainset.mat");
 load("EOGfixcvset.mat");
 load("EOGfixtestset.mat");
-X=EOGfixtrainset(:,1:26);
-y=EOGfixtrainset(:,27);
+X=EOGfixtrainset(:,1:46);
+y=EOGfixtrainset(:,47);
 m = size(X, 1);
-Xval=EOGfixcvset(:,1:26);
-yval=EOGfixcvset(:,27);
+Xval=EOGfixcvset(:,1:46);
+yval=EOGfixcvset(:,47);
 mval=size(Xval,1);
-theta = zeros(26, 1);
-Xtest=EOGfixtestset(:,1:26);
-ytest=EOGfixtestset(:,27);
+theta = zeros(46, 1);
+Xtest=EOGfixtestset(:,1:46);
+ytest=EOGfixtestset(:,47);
 mtest=size(Xtest,1);
 %linear regression
 
