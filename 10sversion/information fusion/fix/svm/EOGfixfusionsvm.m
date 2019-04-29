@@ -8,35 +8,35 @@ f=EOGfixtrainset(:,47);
 K=46;
 fea=mrmr_mid_d(d,f,K);
 Fscore=0;
-bestfeature=[];
+bestfeature=[1:46];
 mRMREER=1;
 
-for count=2:46
-    X=EOGfixtrainset(:,fea(1:count));
-    y=EOGfixtrainset(:,47);
-
-    Xval=EOGfixcvset(:,fea(1:count));
-    yval=EOGfixcvset(:,47);
-
-    Xtest=EOGfixtestset(:,fea(1:count));
-    ytest=EOGfixtestset(:,47);
-
-    
-    %svm
-    % Try different SVM Parameters here
-    [C, sigma] = dataset3Params(X, y, Xval, yval);
-
-    % Train the SVM
-    model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
-    predicth=svmOutput(model, Xtest);
-
-    %mRMR(EER)
-    tempEER=EER(ytest,predicth);
-    if tempEER<mRMREER
-       mRMREER=tempEER;
-       bestfeature=fea(1:count);
-    end
-end
+% for count=2:46
+%     X=EOGfixtrainset(:,fea(1:count));
+%     y=EOGfixtrainset(:,47);
+% 
+%     Xval=EOGfixcvset(:,fea(1:count));
+%     yval=EOGfixcvset(:,47);
+% 
+%     Xtest=EOGfixtestset(:,fea(1:count));
+%     ytest=EOGfixtestset(:,47);
+% 
+%     
+%     %svm
+%     % Try different SVM Parameters here
+%     [C, sigma] = dataset3Params(X, y, Xval, yval);
+% 
+%     % Train the SVM
+%     model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
+%     predicth=svmOutput(model, Xtest);
+% 
+%     %mRMR(EER)
+%     tempEER=EER(ytest,predicth);
+%     if tempEER<mRMREER
+%        mRMREER=tempEER;
+%        bestfeature=fea(1:count);
+%     end
+% end
 
 
 X=EOGfixtrainset(:,bestfeature);

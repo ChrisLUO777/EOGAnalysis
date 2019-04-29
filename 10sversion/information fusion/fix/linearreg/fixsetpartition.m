@@ -2,7 +2,7 @@ load("EOGfixwholeset.mat");
 EOGfixtrainset=[];
 EOGfixcvset=[];
 EOGfixtestset=[];
-for i=0:86  %remember to change this part
+for i=0:2543  %remember to change this part
     out=randperm(5);
     pick=out+i*5;
     EOGfixcvset=[EOGfixcvset;EOGfixwholeset(pick(1),:)];
