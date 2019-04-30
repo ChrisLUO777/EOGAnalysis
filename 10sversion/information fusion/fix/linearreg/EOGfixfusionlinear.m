@@ -12,48 +12,17 @@ theta = zeros(46, 1);
 Xtest=EOGfixtestset(:,1:46);
 ytest=EOGfixtestset(:,47);
 mtest=size(Xtest,1);
-%linear regression
 
-%learning curve
-% lambda = 0;
-% [error_train, error_val] = ...
-%     learningCurve([ones(m, 1) X], y, ...
-%                   [ones(size(Xval, 1), 1) Xval], yval, ...
-%                   lambda);
-% 
-% plot(1:m, error_train, 1:m, error_val);
-% title('Learning curve for linear regression')
-% legend('Train', 'Cross Validation')
-% xlabel('Number of training examples')
-% ylabel('Error')
-% axis([0 115 0 0.5])
-% 
-% fprintf('Program paused. Press enter to continue.\n');
-% pause;
-
-%lambda validation
-close all;
-[lambda_vec, error_train, error_val] = ...
-    validationCurve(X, y, Xval, yval);
-plot(lambda_vec, error_train, lambda_vec, error_val);
-legend('Train', 'Cross Validation');
-xlabel('lambda');
-ylabel('Error');
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
-
-%train linear regression
-close all;
-lambda = 3;
-[theta] = trainLinearReg([ones(m, 1) X], y, lambda);
-
+%%
+%train linear regreesion model
+model=fitrlinear(X,y);
+score = predict(model,Xtest);
+%%
 %EER
 RN=sum(ytest);
 RP=size(ytest,1)-RN;
 
 threshold=-5:0.00001:5;
-predicth=[ones(mtest, 1) Xtest]*theta;
 TPR=zeros(1,size(threshold,2));
 FPR=zeros(1,size(threshold,2));
 count=1;
@@ -61,9 +30,9 @@ for k=threshold
     TP=0;
     FP=0;
     for i=1:size(ytest,1)
-        if((predicth(i,1)<k) && (ytest(i,1)==0))%TP
+        if((score(i,1)<k) && (ytest(i,1)==0))%TP
                 TP=TP+1;
-        elseif((predicth(i,1)<k) && (ytest(i,1)==1))%FP
+        elseif((score(i,1)<k) && (ytest(i,1)==1))%FP
                 FP=FP+1;
         end
     end
@@ -84,10 +53,11 @@ axis([0 1 0 1]);
 fprintf('Program paused. Press enter to continue.\n');
 pause;
 
+%%
 %F score
 close all;
+
 threshold=-5:0.00001:5;
-predicth=[ones(mtest, 1) Xtest]*theta;
 Fscore=zeros(1,size(threshold,2));
 count=1;
 for k=threshold
@@ -95,11 +65,11 @@ for k=threshold
     FP=0;
     FN=0;
     for i=1:size(ytest,1)
-        if((predicth(i,1)<k) && (ytest(i,1)==0))%TP
+        if((score(i,1)<k) && (ytest(i,1)==0))%TP
                 TP=TP+1;
-        elseif((predicth(i,1)<k) && (ytest(i,1)==1))%FP
+        elseif((score(i,1)<k) && (ytest(i,1)==1))%FP
                 FP=FP+1;
-        elseif((predicth(i,1)>k) && (ytest(i,1)==0))%FN
+        elseif((score(i,1)>k) && (ytest(i,1)==0))%FN
                 FN=FN+1;        
         end
     end
