@@ -1,4 +1,4 @@
-subcombs=combinesubs(["04" "08" "12" "16"],["04" "08" "12" "16"],4);
+subcombs=combinesubs(["02" "04" "06" "08" "10" "12" "14" "16"],["02" "04" "06" "08" "10" "12" "14" "16"],8);
 count=1;
 for k=1:size(subcombs,1)
     path1="EOG"+subcombs(k,1)+"fix";

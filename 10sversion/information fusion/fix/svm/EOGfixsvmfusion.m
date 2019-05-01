@@ -1,6 +1,5 @@
 close all; clear;
 load("EOGfixtrainset.mat");
-load("EOGfixcvset.mat");
 load("EOGfixtestset.mat");
 
 d=EOGfixtrainset(:,1:46);
@@ -15,9 +14,6 @@ mRMREER=1;
 for count=2:46
     X=EOGfixtrainset(:,fea(1:count));
     y=EOGfixtrainset(:,47);
-
-    Xval=EOGfixcvset(:,fea(1:count));
-    yval=EOGfixcvset(:,47);
 
     Xtest=EOGfixtestset(:,fea(1:count));
     ytest=EOGfixtestset(:,47);
@@ -39,9 +35,6 @@ end
 X=EOGfixtrainset(:,bestfeature);
 y=EOGfixtrainset(:,47);
 m = size(X, 1);
-Xval=EOGfixcvset(:,bestfeature);
-yval=EOGfixcvset(:,47);
-mval=size(Xval,1);
 Xtest=EOGfixtestset(:,bestfeature);
 ytest=EOGfixtestset(:,47);
 mtest=size(Xtest,1);
@@ -74,7 +67,7 @@ end
 
 plot(FPR,TPR);
 hold on;
-plot(FPR,TPR,'o');
+plot(FPR,TPR,'.');
 plot(0:0.01:1,1:-0.01:0,'r');
 grid on;
 xlabel('False Positive Rate');
