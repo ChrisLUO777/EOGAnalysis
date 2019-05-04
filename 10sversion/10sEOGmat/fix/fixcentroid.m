@@ -28,6 +28,12 @@ function y=fixcentroid(x,path,name,type,number)
             fixcountv=[];
         end
     end
+    if(size(fixcentroidh,1)==0)
+        fixcentroidh=[0];
+    end
+    if(size(fixcentroidv,1)==0)
+        fixcentroidv=[0];
+    end
     [f,xi]=ksdensity(fixcentroidh);
     y=[f;xi];
     [f,xi]=ksdensity(fixcentroidv);

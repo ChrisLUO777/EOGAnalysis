@@ -1,8 +1,7 @@
 function result=EER(ytest,predicth)
     result=1;
-    testsize=size(ytest,1);
     RN=sum(ytest);
-    RP=testsize-RN;
+    RP=size(ytest,1)-RN;
     threshold=-5:0.00001:5;
     TPR=0;
     FPR=0;
@@ -18,7 +17,7 @@ function result=EER(ytest,predicth)
         end
         TPR=(TP/RP);
         FPR=(FP/RN);
-        if (1-TPR)<=FPR
+        if TPR>=(1-FPR)
             result=FPR;
             break;
         end

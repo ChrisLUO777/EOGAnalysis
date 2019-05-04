@@ -17,7 +17,7 @@ function result=EER(ytest,predicth)
         end
         TPR=(TP/RP);
         FPR=(FP/RN);
-        if (1-TPR)<=FPR
+        if TPR>=(1-FPR)
             result=FPR;
             break;
         end

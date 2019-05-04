@@ -28,6 +28,12 @@ function y=fixstartpdf(x,path,name,type,number)
             fixcountv=0;
         end
     end
+    if(size(fixstarth,1)==0)
+        fixstarth=[0];
+    end
+    if(size(fixstartv,1)==0)
+        fixstartv=[0];
+    end
     [f,xi]=ksdensity(fixstarth);
     y=[f;xi];
     [f,xi]=ksdensity(fixstartv);

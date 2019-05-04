@@ -28,6 +28,12 @@ function y=fixdurationpdf(x,path,name,type,number)
             fixcountv=0;
         end
     end
+    if(size(fixdurationh,1)==0)
+        fixdurationh=[0];
+    end
+    if(size(fixdurationv,1)==0)
+        fixdurationv=[0];
+    end
     [f,xi]=ksdensity(fixdurationh);
     y=[f;xi];
     [f,xi]=ksdensity(fixdurationv);
