@@ -4,10 +4,10 @@ load("EOGfixtestset.mat");
 
 %%
 %train SVM
-X=EOGfixtrainset(:,1:28);
+X=EOGfixtrainset(:,1:46);
 y=EOGfixtrainset(:,47);
 m = size(X, 1);
-Xtest=EOGfixtestset(:,1:28);
+Xtest=EOGfixtestset(:,1:46);
 ytest=EOGfixtestset(:,47);
 mtest=size(Xtest,1);
 
@@ -40,7 +40,7 @@ fprintf('Fscore=%f \n',Fscore);
 % RN=sum(ytest);
 % RP=size(ytest,1)-RN;
 % 
-% threshold=-5:0.00001:5;
+% threshold=-5:0.0001:5;
 % TPR=zeros(1,size(threshold,2));
 % FPR=zeros(1,size(threshold,2));
 % count=1;
