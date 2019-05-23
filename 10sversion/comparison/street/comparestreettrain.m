@@ -1,8 +1,10 @@
-subcombs=combinesubs(["01" "03" "05" "07" "09" "11" "13" "15"],["01" "03" "05" "07" "09" "11" "13" "15"],8);
+close all; clear;
+subcombs=combinesubs(["01" "02" "03" "04" "05" "06" "07" "08" "09" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19" "20" "21" "22" "23" "24" "25" "26" "27" "28" "29" "30" "31" "32"],...
+    ["01" "02" "03" "04" "05" "06" "07" "08" "09" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19" "20" "21" "22" "23" "24" "25" "26" "27" "28" "29" "30" "31" "32"],32);
 count=1;
 for k=1:size(subcombs,1)
-    path1="EOG"+subcombs(k,1)+"street";
-    path2="EOG"+subcombs(k,2)+"street";
+    path1=subcombs(k,1)+"\EOG"+subcombs(k,1)+"street";
+    path2=subcombs(k,2)+"\EOG"+subcombs(k,2)+"street";
     type="street";
     if(subcombs(k,1)~=subcombs(k,2))
         for i=1:10

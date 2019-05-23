@@ -12,15 +12,19 @@ function y=sacdurationpdf(x,path,name,type,number)
     for i=1:size(cwth,2)
         if(cwth(i)>thsd||cwth(i)<-thsd)
             saccounth=saccounth+1;
-        elseif(cwth(i)<=thsd&&cwth(i)>=-thsd&&saccounth>4)
-            sacdurationh=[sacdurationh;saccounth];
+        elseif(cwth(i)<=thsd&&cwth(i)>=-thsd)
+            if(saccounth>4)
+                sacdurationh=[sacdurationh;saccounth];
+            end
             saccounth=0;
         end
         
         if(cwtv(i)>thsd||cwtv(i)<-thsd)
             saccountv=saccountv+1;
-        elseif(cwtv(i)<=thsd&&cwtv(i)>=-thsd&&saccountv>4)
-            sacdurationv=[sacdurationv;saccountv];
+        elseif(cwtv(i)<=thsd&&cwtv(i)>=-thsd)
+            if(saccountv>4)
+                sacdurationv=[sacdurationv;saccountv];
+            end
             saccountv=0;
         end
     end
