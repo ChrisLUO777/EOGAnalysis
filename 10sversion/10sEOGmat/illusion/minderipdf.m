@@ -1,4 +1,4 @@
-function y=minderipdf(x,path,name,type,number)
+function y=minderipdf(x,path,name,type,number,time)
     assert( ismatrix(x) );
     derivh=diff(x(:,1),1);
     derivv=diff(x(:,2),1);
@@ -30,9 +30,15 @@ function y=minderipdf(x,path,name,type,number)
             saccountv=[];
         end
     end
+    if(size(minderih,1)==0)
+        minderih=[0];
+    end
+    if(size(minderiv,1)==0)
+        minderiv=[0];
+    end
     [f,xi]=ksdensity(minderih);
     y=[f;xi];
     [f,xi]=ksdensity(minderiv);
     y=[y;f;xi];
-    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"minderipdf.mat",'y');
+    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"minderipdf"+time+".mat",'y');
 end

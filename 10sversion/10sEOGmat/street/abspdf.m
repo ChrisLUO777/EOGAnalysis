@@ -1,4 +1,4 @@
-function y=abspdf(x,path,name,type,number)
+function y=abspdf(x,path,name,type,number,time)
     assert( ismatrix(x) );
     meanh=mean(x(:,1));
     meanv=mean(x(:,2));
@@ -8,5 +8,5 @@ function y=abspdf(x,path,name,type,number)
     y=[f;xi];
     [f,xi]=ksdensity(absv);
     y=[y;f;xi];
-    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"abspdf.mat",'y');
+    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"abspdf"+time+".mat",'y');
 end

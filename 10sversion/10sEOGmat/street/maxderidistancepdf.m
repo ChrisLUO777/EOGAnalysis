@@ -1,4 +1,4 @@
-function y=maxderidistancepdf(x,path,name,type,number)
+function y=maxderidistancepdf(x,path,name,type,number,time)
     assert( ismatrix(x) );
     derivh=diff(x(:,1),1);
     derivv=diff(x(:,2),1);
@@ -30,9 +30,15 @@ function y=maxderidistancepdf(x,path,name,type,number)
             saccountv=[];
         end
     end
+    if(size(maxderidistanceh,1)==0)
+        maxderidistanceh=[0];
+    end
+    if(size(maxderidistancev,1)==0)
+        maxderidistancev=[0];
+    end
     [f,xi]=ksdensity(maxderidistanceh);
     y=[f;xi];
     [f,xi]=ksdensity(maxderidistancev);
     y=[y;f;xi];
-    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"maxderidistancepdf.mat",'y');
+    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"maxderidistancepdf"+time+".mat",'y');
 end

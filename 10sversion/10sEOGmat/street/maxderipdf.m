@@ -1,4 +1,4 @@
-function y=maxderipdf(x,path,name,type,number)
+function y=maxderipdf(x,path,name,type,number,time)
     assert( ismatrix(x) );
     derivh=diff(x(:,1),1);
     derivv=diff(x(:,2),1);
@@ -30,9 +30,15 @@ function y=maxderipdf(x,path,name,type,number)
             saccountv=[];
         end
     end
+    if(size(maxderih,1)==0)
+        maxderih=[0];
+    end
+    if(size(maxderiv,1)==0)
+        maxderiv=[0];
+    end
     [f,xi]=ksdensity(maxderih);
     y=[f;xi];
     [f,xi]=ksdensity(maxderiv);
     y=[y;f;xi];
-    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"maxderipdf.mat",'y');
+    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"maxderipdf"+time+".mat",'y');
 end

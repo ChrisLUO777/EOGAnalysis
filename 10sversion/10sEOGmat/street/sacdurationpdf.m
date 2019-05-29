@@ -1,4 +1,4 @@
-function y=sacdurationpdf(x,path,name,type,number)
+function y=sacdurationpdf(x,path,name,type,number,time)
     assert( ismatrix(x) );
     CWTcoeffsh = cwt(x(:,1),1:128,'haar');
     CWTcoeffsv = cwt(x(:,2),1:128,'haar');
@@ -28,9 +28,15 @@ function y=sacdurationpdf(x,path,name,type,number)
             saccountv=0;
         end
     end
+    if(size(sacdurationh,1)==0)
+        sacdurationh=[0];
+    end
+    if(size(sacdurationv,1)==0)
+        sacdurationv=[0];
+    end
     [f,xi]=ksdensity(sacdurationh);
     y=[f;xi];
     [f,xi]=ksdensity(sacdurationv);
     y=[y;f;xi];
-    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"sacdurationpdf.mat",'y');
+    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"sacdurationpdf"+time+".mat",'y');
 end

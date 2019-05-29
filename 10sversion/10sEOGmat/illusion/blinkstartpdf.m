@@ -1,4 +1,4 @@
-function y=blinkstartpdf(x,path,name,type,number)
+function y=blinkstartpdf(x,path,name,type,number,time)
     assert( ismatrix(x) );
     CWTcoeffsv = cwt(x(:,2),1:128,'haar');
     cwtv=CWTcoeffsv(20,:);
@@ -38,5 +38,5 @@ function y=blinkstartpdf(x,path,name,type,number)
     end
     [f,xi]=ksdensity(blinkstart);
     y=[f;xi];
-    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"blinkstartpdf.mat",'y');
+    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"blinkstartpdf"+time+".mat",'y');
 end

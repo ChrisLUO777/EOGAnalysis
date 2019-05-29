@@ -1,4 +1,4 @@
-function y=slopefnpdf(x,path,name,type,number)
+function y=slopefnpdf(x,path,name,type,number,time)
     assert( ismatrix(x) );
     CWTcoeffsh = cwt(x(:,1),1:128,'haar');
     CWTcoeffsv = cwt(x(:,2),1:128,'haar');
@@ -32,9 +32,15 @@ function y=slopefnpdf(x,path,name,type,number)
             saccountv=[];
         end
     end
+    if(size(slopefnh,1)==0)
+        slopefnh=[0];
+    end
+    if(size(slopefnv,1)==0)
+        slopefnv=[0];
+    end
     [f,xi]=ksdensity(slopefnh);
     y=[f;xi];
     [f,xi]=ksdensity(slopefnv);
     y=[y;f;xi];
-    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"slopefnpdf.mat",'y');
+    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"slopefnpdf"+time+".mat",'y');
 end

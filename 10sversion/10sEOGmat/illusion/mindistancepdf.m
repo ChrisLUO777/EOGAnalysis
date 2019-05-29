@@ -1,4 +1,4 @@
-function y=mindistancepdf(x,path,name,type,number)
+function y=mindistancepdf(x,path,name,type,number,time)
     assert( ismatrix(x) );
     CWTcoeffsh = cwt(x(:,1),1:128,'haar');
     CWTcoeffsv = cwt(x(:,2),1:128,'haar');
@@ -28,9 +28,15 @@ function y=mindistancepdf(x,path,name,type,number)
             saccountv=[];
         end
     end
+    if(size(sacdistanceh,1)==0)
+        sacdistanceh=[0];
+    end
+    if(size(sacdistancev,1)==0)
+        sacdistancev=[0];
+    end
     [f,xi]=ksdensity(sacdistanceh);
     y=[f;xi];
     [f,xi]=ksdensity(sacdistancev);
     y=[y;f;xi];
-    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"mindistancepdf.mat",'y');
+    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"mindistancepdf"+time+".mat",'y');
 end
