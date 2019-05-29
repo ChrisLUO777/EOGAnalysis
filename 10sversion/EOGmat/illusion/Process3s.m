@@ -3,11 +3,11 @@ subname=["15" "16"];
 for name=subname
     for i=1:10
         load(".\"+name+"\EOG"+name+"illusion"+i+".mat");
-        firstco=data(1:2000,1);
-        secondco=data(1:2000,2);
-        data10s=[firstco secondco];
-        mkdir(".\"+name+"\EOG"+name+"illusion"+i);
+        firstco=data(701:1300,1);
+        secondco=data(701:1300,2);
+        data3s=[firstco secondco];
+        %mkdir(".\"+name+"\EOG"+name+"illusion"+i);
         addpath(genpath(pwd));
-        save(".\"+name+"\EOG"+name+"illusion"+i+"\EOG"+name+"illusion"+i+"10s.mat",'data10s');
+        save(".\"+name+"\EOG"+name+"illusion"+i+"\EOG"+name+"illusion"+i+"3s.mat",'data3s');
     end
 end

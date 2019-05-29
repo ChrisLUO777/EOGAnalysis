@@ -7,11 +7,11 @@ for name=subname
     load(".\"+name+"\EOG"+name+"illusion.mat");
     length=size(data,1);
     for i=1:10
-        firstco=data((1+(length-2000)*(i-1)/9):(2000+(length-2000)*(i-1)/9),1);
-        secondco=data((1+(length-2000)*(i-1)/9):(2000+(length-2000)*(i-1)/9),2);
-        data10s=[firstco secondco];
-        mkdir(".\"+name+"\EOG"+name+"illusion"+i);
+        firstco=data((501+(length-2000)*(i-1)/9):(1500+(length-2000)*(i-1)/9),1);
+        secondco=data((501+(length-2000)*(i-1)/9):(1500+(length-2000)*(i-1)/9),2);
+        data5s=[firstco secondco];
+        %mkdir(".\"+name+"\EOG"+name+"illusion"+i);
         addpath(genpath(pwd));
-        save(".\"+name+"\EOG"+name+"illusion"+i+"\EOG"+name+"illusion"+i+"10s.mat",'data10s');
+        save(".\"+name+"\EOG"+name+"illusion"+i+"\EOG"+name+"illusion"+i+"5s.mat",'data5s');
     end
 end

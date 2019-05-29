@@ -10,7 +10,7 @@ for name=subname
         firstco=data((1+(length-2000)*(i-1)/9):(2000+(length-2000)*(i-1)/9),1);
         secondco=data((1+(length-2000)*(i-1)/9):(2000+(length-2000)*(i-1)/9),2);
         data10s=[firstco secondco];
-        mkdir(".\"+name+"\EOG"+name+"street"+i);
+        %mkdir(".\"+name+"\EOG"+name+"street"+i);
         addpath(genpath(pwd));
         save(".\"+name+"\EOG"+name+"street"+i+"\EOG"+name+"street"+i+"10s.mat",'data10s');
     end

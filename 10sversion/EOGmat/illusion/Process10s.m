@@ -6,7 +6,7 @@ for name=subname
         firstco=data(1:2000,1);
         secondco=data(1:2000,2);
         data10s=[firstco secondco];
-        mkdir(".\"+name+"\EOG"+name+"illusion"+i);
+        %mkdir(".\"+name+"\EOG"+name+"illusion"+i);
         addpath(genpath(pwd));
         save(".\"+name+"\EOG"+name+"illusion"+i+"\EOG"+name+"illusion"+i+"10s.mat",'data10s');
     end

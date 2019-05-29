@@ -7,11 +7,11 @@ for name=subname
     load(".\"+name+"\EOG"+name+"street.mat");
     length=size(data,1);
     for i=1:10
-        firstco=data((1+(length-2000)*(i-1)/9):(2000+(length-2000)*(i-1)/9),1);
-        secondco=data((1+(length-2000)*(i-1)/9):(2000+(length-2000)*(i-1)/9),2);
-        data10s=[firstco secondco];
-        mkdir(".\"+name+"\EOG"+name+"street"+i);
+        firstco=data((701+(length-2000)*(i-1)/9):(1300+(length-2000)*(i-1)/9),1);
+        secondco=data((701+(length-2000)*(i-1)/9):(1300+(length-2000)*(i-1)/9),2);
+        data3s=[firstco secondco];
+        %mkdir(".\"+name+"\EOG"+name+"street"+i);
         addpath(genpath(pwd));
-        save(".\"+name+"\EOG"+name+"street"+i+"\EOG"+name+"street"+i+"10s.mat",'data10s');
+        save(".\"+name+"\EOG"+name+"street"+i+"\EOG"+name+"street"+i+"3s.mat",'data3s');
     end
 end

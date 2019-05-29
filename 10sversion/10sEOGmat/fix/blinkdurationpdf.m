@@ -1,4 +1,4 @@
-function y=blinkdurationpdf(x,path,name,type,number)
+function y=blinkdurationpdf(x,path,name,type,number,time)
     assert( ismatrix(x) );
     CWTcoeffsv = cwt(x(:,2),1:128,'haar');
     cwtv=CWTcoeffsv(20,:);
@@ -38,5 +38,5 @@ function y=blinkdurationpdf(x,path,name,type,number)
     end
     [f,xi]=ksdensity(blinkduration);
     y=[f;xi];
-    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"blinkdurationpdf.mat",'y');
+    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"blinkdurationpdf"+time+".mat",'y');
 end

@@ -1,4 +1,4 @@
-function y=minderidistancepdf(x,path,name,type,number)
+function y=minderidistancepdf(x,path,name,type,number,time)
     assert( ismatrix(x) );
     derivh=diff(x(:,1),1);
     derivv=diff(x(:,2),1);
@@ -30,9 +30,15 @@ function y=minderidistancepdf(x,path,name,type,number)
             saccountv=[];
         end
     end
+    if(size(minderidistanceh,1)==0)
+        minderidistanceh=[0];
+    end
+    if(size(minderidistancev,1)==0)
+        minderidistancev=[0];
+    end
     [f,xi]=ksdensity(minderidistanceh);
     y=[f;xi];
     [f,xi]=ksdensity(minderidistancev);
     y=[y;f;xi];
-    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"minderidistancepdf.mat",'y');
+    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"minderidistancepdf"+time+".mat",'y');
 end

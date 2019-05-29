@@ -1,4 +1,4 @@
-function y=sacstartpdf(x,path,name,type,number)
+function y=sacstartpdf(x,path,name,type,number,time)
     assert( ismatrix(x) );
     CWTcoeffsh = cwt(x(:,1),1:128,'haar');
     CWTcoeffsv = cwt(x(:,2),1:128,'haar');
@@ -28,9 +28,15 @@ function y=sacstartpdf(x,path,name,type,number)
            saccountv=0;
         end
     end
+    if(size(sacstarth,1)==0)
+        sacstarth=[0];
+    end
+    if(size(sacstartv,1)==0)
+        sacstartv=[0];
+    end
     [f,xi]=ksdensity(sacstarth);
     y=[f;xi];
     [f,xi]=ksdensity(sacstartv);
     y=[y;f;xi];
-    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"sacstartpdf.mat",'y');
+    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"sacstartpdf"+time+".mat",'y');
 end

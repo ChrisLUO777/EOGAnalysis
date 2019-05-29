@@ -1,4 +1,4 @@
-function y=maxpdf(x,path,name,type,number)
+function y=maxpdf(x,path,name,type,number,time)
     assert( ismatrix(x) );
     CWTcoeffsh = cwt(x(:,1),1:128,'haar');
     CWTcoeffsv = cwt(x(:,2),1:128,'haar');
@@ -28,9 +28,15 @@ function y=maxpdf(x,path,name,type,number)
             saccountv=[];
         end
     end
+    if(size(sacamplitudeh,1)==0)
+        sacamplitudeh=[0];
+    end
+    if(size(sacamplitudev,1)==0)
+        sacamplitudev=[0];
+    end
     [f,xi]=ksdensity(sacamplitudeh);
     y=[f;xi];
     [f,xi]=ksdensity(sacamplitudev);
     y=[y;f;xi];
-    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"maxpdf.mat",'y');
+    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"maxpdf"+time+".mat",'y');
 end

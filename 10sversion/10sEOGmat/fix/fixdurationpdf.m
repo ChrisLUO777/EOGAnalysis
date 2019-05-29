@@ -1,4 +1,4 @@
-function y=fixdurationpdf(x,path,name,type,number)
+function y=fixdurationpdf(x,path,name,type,number,time)
     assert( ismatrix(x) );
     CWTcoeffsh = cwt(x(:,1),1:128,'haar');
     CWTcoeffsv = cwt(x(:,2),1:128,'haar');
@@ -38,5 +38,5 @@ function y=fixdurationpdf(x,path,name,type,number)
     y=[f;xi];
     [f,xi]=ksdensity(fixdurationv);
     y=[y;f;xi];
-    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"fixdurationpdf.mat",'y');
+    save(".\"+name+"\"+path+number+"\EOG"+name+type+number+"fixdurationpdf"+time+".mat",'y');
 end
