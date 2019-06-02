@@ -34,8 +34,10 @@ end
 precise=TP/(TP+FP);
 recall=TP/(TP+FN);
 Fscore=2*precise*recall/(precise+recall);
+BAC=0.5*TP/(TP+FN)+0.5*TN/(TN+FP);
 fprintf('TP=%f, FN=%f, FP=%f, TN=%f \n',TP,FN,FP,TN);
 fprintf('Fscore=%f \n',Fscore);
+fprintf('BAC=%f \n',BAC);
 %%
 %EER
 % RN=sum(ytest);
