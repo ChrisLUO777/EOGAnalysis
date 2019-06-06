@@ -1,18 +1,18 @@
 close all; clear;
 time="10s";
-load("EOGstreettrainset"+time+".mat");
-load("EOGstreettestset"+time+".mat");
+load("EOGfixtrainset"+time+".mat");
+load("EOGfixtestset"+time+".mat");
 
 %%
 %train SVM
-X=EOGstreettrainset(:,1:46);
-y=EOGstreettrainset(:,47);
+X=EOGfixtrainset(:,1:46);
+y=EOGfixtrainset(:,47);
 m = size(X, 1);
-Xtest=EOGstreettestset(:,1:46);
-ytest=EOGstreettestset(:,47);
+Xtest=EOGfixtestset(:,1:46);
+ytest=EOGfixtestset(:,47);
 mtest=size(Xtest,1);
 
-model=fitcsvm(X,y,'KernelFunction','gaussian');
+model=fitcknn(X,y);
 [label,score] = predict(model,Xtest);
 %%
 %confusion matrix

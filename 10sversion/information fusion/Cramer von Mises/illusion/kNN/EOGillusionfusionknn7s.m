@@ -1,5 +1,5 @@
 close all; clear;
-time="10s";
+time="7s";
 load("EOGillusiontrainset"+time+".mat");
 load("EOGillusiontestset"+time+".mat");
 %%
@@ -11,7 +11,7 @@ Xtest=EOGillusiontestset(:,1:46);
 ytest=EOGillusiontestset(:,47);
 mtest=size(Xtest,1);
 
-model=fitcsvm(X,y,'KernelFunction','gaussian');
+model=fitcknn(X,y);
 [label,score] = predict(model,Xtest);
 %%
 %confusion matrix

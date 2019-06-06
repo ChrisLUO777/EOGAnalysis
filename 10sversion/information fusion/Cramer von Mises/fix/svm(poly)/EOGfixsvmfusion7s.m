@@ -12,7 +12,7 @@ Xtest=EOGfixtestset(:,1:46);
 ytest=EOGfixtestset(:,47);
 mtest=size(Xtest,1);
 
-model=fitcsvm(X,y,'KernelFunction','gaussian');
+model=fitcsvm(X,y,'KernelFunction','polynomial');
 [label,score] = predict(model,Xtest);
 %%
 %confusion matrix

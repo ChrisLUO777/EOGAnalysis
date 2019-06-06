@@ -11,7 +11,7 @@ Xtest=EOGillusiontestset(:,1:46);
 ytest=EOGillusiontestset(:,47);
 mtest=size(Xtest,1);
 
-model=fitcsvm(X,y,'KernelFunction','gaussian');
+model=fitcsvm(X,y,'KernelFunction','linear');
 [label,score] = predict(model,Xtest);
 %%
 %confusion matrix

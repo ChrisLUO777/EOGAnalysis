@@ -4,14 +4,14 @@ load("EOGillusiontrainset"+time+".mat");
 load("EOGillusiontestset"+time+".mat");
 %%
 %train SVM
-X=EOGillusiontrainset(:,1:46);
-y=EOGillusiontrainset(:,47);
+X=EOGillusiontestset(:,1:46);
+y=EOGillusiontestset(:,47);
 m = size(X, 1);
-Xtest=EOGillusiontestset(:,1:46);
-ytest=EOGillusiontestset(:,47);
+Xtest=EOGillusiontrainset(:,1:46);
+ytest=EOGillusiontrainset(:,47);
 mtest=size(Xtest,1);
 
-model=fitcsvm(X,y,'KernelFunction','gaussian');
+model=fitcsvm(X,y,'KernelFunction','polynomial');
 [label,score] = predict(model,Xtest);
 %%
 %confusion matrix
