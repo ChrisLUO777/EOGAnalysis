@@ -1,0 +1,8 @@
+comparefixtest3s
+comparefixtrainset3s
+comparefixtest5s
+comparefixtrainset5s
+comparefixtest7s
+comparefixtrainset7s
+comparefixtest10s
+comparefixtrainset10s
