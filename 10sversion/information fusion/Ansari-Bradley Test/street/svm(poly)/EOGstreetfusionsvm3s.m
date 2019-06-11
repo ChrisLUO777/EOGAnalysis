@@ -5,14 +5,14 @@ load("EOGstreettestset"+time+".mat");
 
 %%
 %train SVM
-X=EOGstreettrainset(:,1:46);
-y=EOGstreettrainset(:,47);
+X=EOGstreettestset(:,1:46);
+y=EOGstreettestset(:,47);
 m = size(X, 1);
-Xtest=EOGstreettestset(:,1:46);
-ytest=EOGstreettestset(:,47);
+Xtest=EOGstreettrainset(:,1:46);
+ytest=EOGstreettrainset(:,47);
 mtest=size(Xtest,1);
 
-model=fitcsvm(X,y,'KernelFunction','gaussian');
+model=fitcsvm(X,y,'KernelFunction','polynomial');
 [label,score] = predict(model,Xtest);
 %%
 %confusion matrix
