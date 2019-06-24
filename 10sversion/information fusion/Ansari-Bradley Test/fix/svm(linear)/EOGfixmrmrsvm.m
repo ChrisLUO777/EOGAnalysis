@@ -1,12 +1,13 @@
 close all; clear;
-load("EOGfixtrainset.mat");
-load("EOGfixtestset.mat");
+time="10s";
+load("EOGfixtrainset"+time+".mat");
+load("EOGfixtestset"+time+".mat");
 
 d=EOGfixtrainset(:,1:46);
 f=EOGfixtrainset(:,47);
 K=46;
 fea=mrmr_mid_d(d,f,K);
-bestfeature=[1:46];
+bestfeature=fea(1:26);
 mRMRfscore=0;
 %%
 % %mRMR
@@ -51,7 +52,7 @@ Xtest=EOGfixtestset(:,bestfeature);
 ytest=EOGfixtestset(:,47);
 mtest=size(Xtest,1);
 
-model=fitcsvm(X,y,'KernelFunction','gaussian');
+model=fitcsvm(X,y,'KernelFunction','linear');
 [label,score] = predict(model,Xtest);
 %%
 %confusion matrix
@@ -77,37 +78,37 @@ fprintf('TP=%f, FN=%f, FP=%f, TN=%f \n',TP,FN,FP,TN);
 fprintf('Fscore=%f \n',Fscore);
 %%
 %EER
-% RN=sum(ytest);
-% RP=size(ytest,1)-RN;
-% 
-% threshold=-5:0.00001:5;
-% TPR=zeros(1,size(threshold,2));
-% FPR=zeros(1,size(threshold,2));
-% count=1;
-% bestth=0;
-% for k=threshold
-%     TP=0;
-%     FP=0;
-%     for i=1:size(ytest,1)
-%         if((score(i,2)<k) && (ytest(i,1)==0))%TP
-%                 TP=TP+1;
-%         elseif((score(i,2)<k) && (ytest(i,1)==1))%FP
-%                 FP=FP+1;
-%         end
-%     end
-%     TPR(1,count)=(TP/RP);
-%     FPR(1,count)=(FP/RN);
-%     if TPR(1,count)<=(1-FPR(1,count))
-%        bestth=k;
-%     end
-%     count=count+1;
-% end
-% 
-% plot(FPR,TPR);
-% hold on;
-% plot(FPR,TPR,'.');
-% plot(0:0.01:1,1:-0.01:0,'r');
-% grid on;
-% xlabel('False Positive Rate');
-% ylabel('True Positive Rate');
-% axis([0 1 0 1]);
+RN=sum(ytest);
+RP=size(ytest,1)-RN;
+
+threshold=-5:0.0001:5;
+TPR=zeros(1,size(threshold,2));
+FPR=zeros(1,size(threshold,2));
+count=1;
+bestth=0;
+for k=threshold
+    TP=0;
+    FP=0;
+    for i=1:size(ytest,1)
+        if((score(i,2)<k) && (ytest(i,1)==0))%TP
+                TP=TP+1;
+        elseif((score(i,2)<k) && (ytest(i,1)==1))%FP
+                FP=FP+1;
+        end
+    end
+    TPR(1,count)=(TP/RP);
+    FPR(1,count)=(FP/RN);
+    if TPR(1,count)<=(1-FPR(1,count))
+       bestth=k;
+    end
+    count=count+1;
+end
+
+plot(FPR,TPR);
+hold on;
+plot(FPR,TPR,'.');
+plot(0:0.01:1,1:-0.01:0,'r');
+grid on;
+xlabel('False Positive Rate');
+ylabel('True Positive Rate');
+axis([0 1 0 1]);

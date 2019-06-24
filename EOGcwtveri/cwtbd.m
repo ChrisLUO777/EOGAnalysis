@@ -1,3 +1,4 @@
+close all; clear;
 subname=["Anh" "Luo" "Yi"];
 threshold=0.01:0.001:0.08;
 
@@ -44,7 +45,7 @@ for thsd=threshold
                 curpeak(1,1)=sacpeakv(n,1);
                 curpeak(1,2)=sacpeakv(n,2);
             elseif(sacpeakv(n,1)>0)
-                if(curpeak(1,1)<0&&(sacpeakv(n,2)-curpeak(1,2))<100)%following a positive peak, and within 500ms
+                if(curpeak(1,1)<0&&(sacpeakv(n,2)-curpeak(1,2))<80)%following a positive peak, and within 400ms
                     blinkpred=[blinkpred;curpeak(1,2) sacpeakv(n,2)];
                 end
                 curpeak=[0 0];
