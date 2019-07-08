@@ -7,7 +7,6 @@ d=EOGfixtrainset(:,1:46);
 f=EOGfixtrainset(:,47);
 K=46;
 fea=mrmr_mid_d(d,f,K);
-bestfeature=fea(1:26);
 mRMRfscore=0;
 %%
 % %mRMR
@@ -45,70 +44,103 @@ mRMRfscore=0;
 % end
 %%
 %train SVM
-X=EOGfixtrainset(:,bestfeature);
-y=EOGfixtrainset(:,47);
-m = size(X, 1);
-Xtest=EOGfixtestset(:,bestfeature);
-ytest=EOGfixtestset(:,47);
-mtest=size(Xtest,1);
-
-model=fitcsvm(X,y,'KernelFunction','linear');
-[label,score] = predict(model,Xtest);
+% X=EOGfixtrainset(:,bestfeature);
+% y=EOGfixtrainset(:,47);
+% m = size(X, 1);
+% Xtest=EOGfixtestset(:,bestfeature);
+% ytest=EOGfixtestset(:,47);
+% mtest=size(Xtest,1);
+% 
+% model=fitcsvm(X,y,'KernelFunction','linear');
+% [label,score] = predict(model,Xtest);
 %%
 %confusion matrix
-TP=0;
-FP=0;
-TN=0;
-FN=0;
-for i=1:size(ytest,1)
-    if((label(i,1)==0) && (ytest(i,1)==0))%TP
-                TP=TP+1;
-    elseif((label(i,1)==0) && (ytest(i,1)==1))%FP
-                FP=FP+1;
-    elseif((label(i,1)==1) && (ytest(i,1)==1))%TN
-                TN=TN+1;
-    elseif((label(i,1)==1) && (ytest(i,1)==0))%FN
-                FN=FN+1;
-    end
-end
-precise=TP/(TP+FP);
-recall=TP/(TP+FN);
-Fscore=2*precise*recall/(precise+recall);
-fprintf('TP=%f, FN=%f, FP=%f, TN=%f \n',TP,FN,FP,TN);
-fprintf('Fscore=%f \n',Fscore);
+% TP=0;
+% FP=0;
+% TN=0;
+% FN=0;
+% for i=1:size(ytest,1)
+%     if((label(i,1)==0) && (ytest(i,1)==0))%TP
+%                 TP=TP+1;
+%     elseif((label(i,1)==0) && (ytest(i,1)==1))%FP
+%                 FP=FP+1;
+%     elseif((label(i,1)==1) && (ytest(i,1)==1))%TN
+%                 TN=TN+1;
+%     elseif((label(i,1)==1) && (ytest(i,1)==0))%FN
+%                 FN=FN+1;
+%     end
+% end
+% precise=TP/(TP+FP);
+% recall=TP/(TP+FN);
+% Fscore=2*precise*recall/(precise+recall);
+% fprintf('TP=%f, FN=%f, FP=%f, TN=%f \n',TP,FN,FP,TN);
+% fprintf('Fscore=%f \n',Fscore);
 %%
-%EER
-RN=sum(ytest);
-RP=size(ytest,1)-RN;
-
-threshold=-5:0.0001:5;
-TPR=zeros(1,size(threshold,2));
-FPR=zeros(1,size(threshold,2));
-count=1;
-bestth=0;
-for k=threshold
+%feature subsets
+y=EOGfixtrainset(:,47);
+ytest=EOGfixtestset(:,47);
+Fscorelist=zeros(46,1);
+for i=1:46
+    bestfeature=(1:i);
+    X=EOGfixtrainset(:,bestfeature);
+    Xtest=EOGfixtestset(:,bestfeature);
+    model=fitcsvm(X,y,'KernelFunction','linear');
+    [label,score] = predict(model,Xtest);
+    
     TP=0;
     FP=0;
-    for i=1:size(ytest,1)
-        if((score(i,2)<k) && (ytest(i,1)==0))%TP
-                TP=TP+1;
-        elseif((score(i,2)<k) && (ytest(i,1)==1))%FP
-                FP=FP+1;
+    TN=0;
+    FN=0;
+    for j=1:size(ytest,1)
+        if((label(j,1)==0) && (ytest(j,1)==0))%TP
+                    TP=TP+1;
+        elseif((label(j,1)==0) && (ytest(j,1)==1))%FP
+                    FP=FP+1;
+        elseif((label(j,1)==1) && (ytest(j,1)==1))%TN
+                    TN=TN+1;
+        elseif((label(j,1)==1) && (ytest(j,1)==0))%FN
+                    FN=FN+1;
         end
     end
-    TPR(1,count)=(TP/RP);
-    FPR(1,count)=(FP/RN);
-    if TPR(1,count)<=(1-FPR(1,count))
-       bestth=k;
-    end
-    count=count+1;
+    precise=TP/(TP+FP);
+    recall=TP/(TP+FN);
+    %Fscore=2*precise*recall/(precise+recall);
+    BAC=0.5*recall+0.5*TN/(TN+FP);
+    Fscorelist(i,1)=BAC;
 end
-
-plot(FPR,TPR);
-hold on;
-plot(FPR,TPR,'.');
-plot(0:0.01:1,1:-0.01:0,'r');
-grid on;
-xlabel('False Positive Rate');
-ylabel('True Positive Rate');
-axis([0 1 0 1]);
+%%
+%EER
+% RN=sum(ytest);
+% RP=size(ytest,1)-RN;
+% 
+% threshold=-5:0.0001:5;
+% TPR=zeros(1,size(threshold,2));
+% FPR=zeros(1,size(threshold,2));
+% count=1;
+% bestth=0;
+% for k=threshold
+%     TP=0;
+%     FP=0;
+%     for i=1:size(ytest,1)
+%         if((score(i,2)<k) && (ytest(i,1)==0))%TP
+%                 TP=TP+1;
+%         elseif((score(i,2)<k) && (ytest(i,1)==1))%FP
+%                 FP=FP+1;
+%         end
+%     end
+%     TPR(1,count)=(TP/RP);
+%     FPR(1,count)=(FP/RN);
+%     if TPR(1,count)<=(1-FPR(1,count))
+%        bestth=k;
+%     end
+%     count=count+1;
+% end
+% 
+% plot(FPR,TPR);
+% hold on;
+% plot(FPR,TPR,'.');
+% plot(0:0.01:1,1:-0.01:0,'r');
+% grid on;
+% xlabel('False Positive Rate');
+% ylabel('True Positive Rate');
+% axis([0 1 0 1]);
