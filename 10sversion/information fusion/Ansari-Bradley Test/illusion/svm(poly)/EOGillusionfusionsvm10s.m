@@ -2,12 +2,14 @@ close all; clear;
 time="10s";
 load("EOGillusiontrainset"+time+".mat");
 load("EOGillusiontestset"+time+".mat");
+a=(1:4);b=(13:22);c=(25:26);d=(31:38);
+selectfeature=[a b c d];
 %%
 %train SVM
-X=EOGillusiontrainset(:,1:46);
+X=EOGillusiontrainset(:,selectfeature);
 y=EOGillusiontrainset(:,47);
 m = size(X, 1);
-Xtest=EOGillusiontestset(:,1:46);
+Xtest=EOGillusiontestset(:,selectfeature);
 ytest=EOGillusiontestset(:,47);
 mtest=size(Xtest,1);
 
@@ -15,28 +17,28 @@ model=fitcsvm(X,y,'KernelFunction','polynomial');
 [label,score] = predict(model,Xtest);
 %%
 %confusion matrix
-TP=0;
-FP=0;
-TN=0;
-FN=0;
-for i=1:size(ytest,1)
-    if((label(i,1)==0) && (ytest(i,1)==0))%TP
-                TP=TP+1;
-    elseif((label(i,1)==0) && (ytest(i,1)==1))%FP
-                FP=FP+1;
-    elseif((label(i,1)==1) && (ytest(i,1)==1))%TN
-                TN=TN+1;
-    elseif((label(i,1)==1) && (ytest(i,1)==0))%FN
-                FN=FN+1;
-    end
-end
-precise=TP/(TP+FP);
-recall=TP/(TP+FN);
-Fscore=2*precise*recall/(precise+recall);
-BAC=0.5*TP/(TP+FN)+0.5*TN/(TN+FP);
-fprintf('TP=%f, FN=%f, FP=%f, TN=%f \n',TP,FN,FP,TN);
-fprintf('Fscore=%f \n',Fscore);
-fprintf('BAC=%f \n',BAC);
+% TP=0;
+% FP=0;
+% TN=0;
+% FN=0;
+% for i=1:size(ytest,1)
+%     if((label(i,1)==0) && (ytest(i,1)==0))%TP
+%                 TP=TP+1;
+%     elseif((label(i,1)==0) && (ytest(i,1)==1))%FP
+%                 FP=FP+1;
+%     elseif((label(i,1)==1) && (ytest(i,1)==1))%TN
+%                 TN=TN+1;
+%     elseif((label(i,1)==1) && (ytest(i,1)==0))%FN
+%                 FN=FN+1;
+%     end
+% end
+% precise=TP/(TP+FP);
+% recall=TP/(TP+FN);
+% Fscore=2*precise*recall/(precise+recall);
+% BAC=0.5*TP/(TP+FN)+0.5*TN/(TN+FP);
+% fprintf('TP=%f, FN=%f, FP=%f, TN=%f \n',TP,FN,FP,TN);
+% fprintf('Fscore=%f \n',Fscore);
+% fprintf('BAC=%f \n',BAC);
 %%
 %EER
 % RN=sum(ytest);

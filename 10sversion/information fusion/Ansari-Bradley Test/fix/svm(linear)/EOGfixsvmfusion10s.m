@@ -2,13 +2,14 @@ close all; clear;
 time="10s";
 load("EOGfixtrainset"+time+".mat");
 load("EOGfixtestset"+time+".mat");
-
+a=(1:4);b=(13:22);c=(25:26);d=(31:38);
+selectfeature=[a b c d];
 %%
 %train SVM
-X=EOGfixtrainset(:,1:46);
+X=EOGfixtrainset(:,selectfeature);
 y=EOGfixtrainset(:,47);
 m = size(X, 1);
-Xtest=EOGfixtestset(:,1:46);
+Xtest=EOGfixtestset(:,selectfeature);
 ytest=EOGfixtestset(:,47);
 mtest=size(Xtest,1);
 
